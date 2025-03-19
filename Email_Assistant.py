@@ -11,7 +11,7 @@ def generate_email_content(api_key,prompt,tone,model="gpt-3.5-turbo"):
         return {'error': "OpenAI API Key is not set, Please Enter it",
                 'response': None}
     try:
-        #Generate Response for the Emial Thread
+        #Generate Response for the Emial Threa
         client = OpenAI(api_key=api_key)
         response_messages = [
             {"role": "system", "content": f"You are a helpful assistant that generates email responses. Generate a {tone} tone response"},
