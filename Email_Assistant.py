@@ -2,70 +2,14 @@ import os
 from openai import OpenAI
 from dotenv import load_dotenv
 import streamlit as st
+from utils import generate_email_content
 
 load_dotenv()
-def generate_email_content(api_key,prompt,tone,model="gpt-3.5-turbo"):
-    # Generate Email Response , subject and summary using OpenAI API
-    
-    if not api_key:
-        return {'error': "OpenAI API Key is not set, Please Enter it",
-                'response': None}
-    try:
-        #Generate Response for the Emial Threa
-        client = OpenAI(api_key=api_key)
-        response_messages = [
-            {"role": "system", "content": f"You are a helpful assistant that generates email responses. Generate a {tone} tone response"},
-            {"role": "user", "content": prompt}
-        ]
-        response= client.chat.completions.create(
-            model=model,
-            messages=response_messages,
-            temperature=0.7
-        )
-        email_response = response.choices[0].message.content
-        
-        #Generate Subject Line
-        subject_messages=[
-            {"role": "system", "content": "Generate a concise,appropriate and engaging subject line for the following email response"},
-            {"role": "user", "content": f"Email Response: \n {email_response}"}
-        ]
-        subject_response = client.chat.completions.create(
-            model=model,
-            messages=subject_messages,
-            temperature=0.7
-        )
-        subject_line = subject_response.choices[0].message.content
-        
-        #Generate Thread Summary
-        summary_messages=[
-            {"role": "system", "content": "Generate a concise summary of the email thread"},
-            {"role": "user", "content": f"Original Thread:\n{prompt}\n\n Response:\n{email_response}"}
-        ]
-        summary_response = client.chat.completions.create(
-            model=model,
-            messages=summary_messages,
-            temperature=0.7           
-        )
-        thread_summary = summary_response.choices[0].message.content
-        
-        return{
-            "error": None,
-            "response": email_response,
-            "subject": subject_line,
-            "summary": thread_summary
-        }
-    except Exception as e:
-        return {'error': str(e), 'response': None}
 
-        
-        
-        
-        
 def main():
     st.set_page_config(page_title="Email Assistant", layout="wide")
     st.markdown("<h2>Email Assistant</h2>", unsafe_allow_html=True) 
     st.markdown("generate Profession Email Response with different Tones")
-    
     
     if "OPENAI_API_KEY" not in st.session_state:
         st.session_state.OPENAI_API_KEY = None
@@ -143,14 +87,6 @@ def main():
             st.code(content["summary"], language=None)
 
             st.markdown(f"*Tone: {selected_tone}*")
-            
-                    
-            
-                    
-        
-        
-
-        
 
 if __name__ == "__main__":
     main()
