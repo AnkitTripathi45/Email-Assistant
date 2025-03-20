@@ -23,7 +23,7 @@ A powerful AI-powered email response generator that helps you craft professional
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/email-assistant.git
+git clone https://github.com/AnkitTripathi45/email-assistant.git
 cd email-assistant
 ```
 
