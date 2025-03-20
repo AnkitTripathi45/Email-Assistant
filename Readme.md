@@ -98,12 +98,6 @@ email-assistant/
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 
-## 🙏 Acknowledgments
-
-- OpenAI for providing the GPT model
-- Streamlit for the amazing web framework
-- All contributors and users of this project
-
 ## 📞 Support
 
 If you encounter any issues or have questions, please open an issue in the GitHub repository.
